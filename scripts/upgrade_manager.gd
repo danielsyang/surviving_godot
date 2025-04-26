@@ -9,7 +9,7 @@ var current_upgrade = {}
 func _ready() -> void:
 	experience_manager.level_up.connect(on_level_up)
 	
-func on_level_up(current_level: int):
+func on_level_up(_current_level: int):
 	var chosen_upgrade = upgrade_pool.pick_random() as AbilityUpgrade
 	
 	if chosen_upgrade == null:
