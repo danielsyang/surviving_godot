@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://j70iwf5wylq7"]
+
+[ext_resource type="Texture2D" uid="uid://04oxt8x0hqsm" path="res://assets/axe.png" id="1_qk6ny"]
+[ext_resource type="Script" uid="uid://ble6sfs4qewn1" path="res://scripts/axe_ability.gd" id="1_vhfjx"]
+[ext_resource type="Script" uid="uid://b1cwtgl02glam" path="res://scripts/hitbox_component.gd" id="3_4kw8l"]
+
+[sub_resource type="Animation" id="Animation_4kw8l"]
+resource_name = "default"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_e7wc8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e7wc8"]
+_data = {
+&"RESET": SubResource("Animation_e7wc8"),
+&"default": SubResource("Animation_4kw8l")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7wc8"]
+radius = 9.0
+
+[node name="AxeAbility" type="Node2D"]
+script = ExtResource("1_vhfjx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_e7wc8")
+}
+autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qk6ny")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_4kw8l")
+metadata/_custom_type_script = "uid://b1cwtgl02glam"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_e7wc8")

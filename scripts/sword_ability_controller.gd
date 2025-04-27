@@ -3,7 +3,8 @@ extends Node
 const MAX_RANGE = 200
 
 @export var sword_ability: PackedScene
-var damage = 5;
+
+var damage = 50;
 var base_wait_time = 1.5
 
 func _ready() -> void:
@@ -55,7 +56,7 @@ func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrade: Dictiona
 		return
 
 	var sword_rate_upgrade: float = current_upgrade.get(upgrade.id, {}).quantity || 1.0
-	var percent_reduction = sword_rate_upgrade * .9;
+	var percent_reduction = sword_rate_upgrade * .3;
 
 	$Timer.wait_time = base_wait_time * (1 - percent_reduction)
 	$Timer.start()
