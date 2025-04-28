@@ -19,7 +19,7 @@ func get_health_percentage() -> float:
 	if max_health == 0:
 		return 0
 
-	return min(current_health / max_health, 1) 
+	return min(current_health / max_health, 1)
 
 func check_death() -> void:
 	if current_health == 0:
