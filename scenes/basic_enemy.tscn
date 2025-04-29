@@ -113,7 +113,7 @@ autoplay = "walk"
 [node name="VialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_cuegt")]
 health_component = NodePath("../HealthComponent")
 
-[node name="VelocityComponent" parent="." groups=["enemy"] instance=ExtResource("3_qhw0p")]
+[node name="VelocityComponent" parent="." instance=ExtResource("3_qhw0p")]
 max_speed = 100
 acceleration = 10.0
 
@@ -124,7 +124,6 @@ health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_wm70f")]
-visible = false
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -138,6 +137,5 @@ position = Vector2(0, -4)
 texture = ExtResource("1_3i4hm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_3i4hm")
