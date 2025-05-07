@@ -4,7 +4,7 @@ const MAX_RANGE = 200
 
 @export var sword_ability: PackedScene
 
-var damage = 50;
+var damage = 5;
 var base_wait_time = 1.5
 
 func _ready() -> void:

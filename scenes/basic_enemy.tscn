@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://81uvmbq4pi77"]
+[gd_scene load_steps=16 format=3 uid="uid://81uvmbq4pi77"]
 
 [ext_resource type="Texture2D" uid="uid://cn5ovpwsjyc6p" path="res://assets/rat_enemy.png" id="1_3i4hm"]
 [ext_resource type="Script" uid="uid://c5yss46aub7ny" path="res://scripts/basic_enemy.gd" id="1_md22f"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://c7rcx1830rhja" path="res://scenes/velocity_component.tscn" id="3_qhw0p"]
 [ext_resource type="PackedScene" uid="uid://h35x7lromt12" path="res://scenes/hurtbox_component.tscn" id="4_wm70f"]
 [ext_resource type="PackedScene" uid="uid://mstoobmcqnfa" path="res://scenes/death_component.tscn" id="6_ve544"]
+[ext_resource type="Shader" uid="uid://bkvxgrkg2dqfu" path="res://scenes/hit_flash_component.gdshader" id="8_cij6a"]
+[ext_resource type="PackedScene" uid="uid://cesrjutwdjd6i" path="res://scenes/hit_flash_component.tscn" id="8_n365g"]
 
 [sub_resource type="Animation" id="Animation_ve544"]
 length = 0.001
@@ -96,6 +98,11 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wm70f"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aptn8"]
+resource_local_to_scene = true
+shader = ExtResource("8_cij6a")
+shader_parameter/lerp_percent = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_3i4hm"]
 radius = 5.0
 
@@ -129,6 +136,11 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_wm70f")
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("8_n365g")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_aptn8")
 
 [node name="Visuals" type="Node2D" parent="."]
 
