@@ -50,7 +50,8 @@ func on_timer_timout() -> void:
 		return
 
 	var entities_layer = get_tree().get_first_node_in_group("entities_layer") as Node2D
-	
+
+	var t = enemy_table.pick_random_item()
 	var enemy = enemy_table.pick_random_item().instantiate() as Node2D
 	enemy.global_position = get_spawn_position()
 

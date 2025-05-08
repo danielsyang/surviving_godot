@@ -5,6 +5,7 @@ const MAX_RANGE = 200
 @export var sword_ability: PackedScene
 
 var damage = 5;
+var additional_damage = 1;
 var base_wait_time = 1.5
 
 func _ready() -> void:
@@ -38,7 +39,7 @@ func on_timer_timeout() -> void:
 	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer") as Node2D
 
 	foreground_layer.add_child(sword_instance)
-	sword_instance.hitbox_component.damage = damage
+	sword_instance.hitbox_component.damage = damage * additional_damage
 	
 	var closest_enemy = enemies[0]
 	
@@ -52,13 +53,11 @@ func on_timer_timeout() -> void:
 	sword_instance.rotation = enemy_direction.angle()
 
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrade: Dictionary) -> void:
-	if upgrade.id != "sword_rate":
-		return
+	if upgrade.id == "sword_rate":
+		var sword_rate_upgrade: float = current_upgrade.get(upgrade.id, {}).quantity || 1.0
+		var percent_reduction = sword_rate_upgrade * .3;
 
-	var sword_rate_upgrade: float = current_upgrade.get(upgrade.id, {}).quantity || 1.0
-	var percent_reduction = sword_rate_upgrade * .3;
-
-	$Timer.wait_time = base_wait_time * (1 - percent_reduction)
-	$Timer.start()
-
-	
+		$Timer.wait_time = base_wait_time * (1 - percent_reduction)
+		$Timer.start()
+	elif upgrade.id == "sword_damage":
+		additional_damage = 1 + (current_upgrade["sword_damage"]["quantity"] * .15)

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_iujmt")
 ability_controller_scene = ExtResource("1_ilgqx")
-id = "axe_weapon"
+id = "axe_damage"
 name = "Axe weapon"
 max_quantity = 1
 description = "Periodically sents out an axe attack"
